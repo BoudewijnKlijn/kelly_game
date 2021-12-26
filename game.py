@@ -4,16 +4,12 @@ import time
 import logging
 
 
-STARTUP_MESSAGE = "Welcome to Kelly game.\n" \
-            "You are given the same bet for some number of times.\n" \
-            "On average you gain 20% per turn.\n"
-Q_WIN_PROB = "Enter a win probability (e.g. 10 means 10%):"
-# DEFAULT_WIN_PROB = 60
-Q_GAIN_PERCENT = "Enter how much you receive if you win (after giving away complete bet, 200 = +100%):"
-# DEFAULT_GAIN_PERCENT = 100
+STARTUP_MESSAGE = "Welcome to Kelly game.\nYou are given the same bet for some number of times.\n" \
+                  "On average you gain 7% per turn.\n"
+Q_WIN_PROB = "Enter a win probability (e.g. 60 means 60%):"
+Q_GAIN_PERCENT = "Enter how much you receive if you win (after giving away complete bet, 120 = +20%):"
 Q_NUMBER_OF_TURNS = "Enter how many turns you want to play:"
-AVERAGE_GAIN = 120
-
+AVERAGE_GAIN = 107
 START_CAPITAL = 100
 Q_START_CAPITAL = f"You start the game with {START_CAPITAL} euro."
 Q_CHOOSE_BET = "Enter bet for this turn:"
@@ -31,7 +27,6 @@ class Game:
         logging.basicConfig(filename='log.log', filemode="a", level=logging.DEBUG)
         self.logger = logging.getLogger('GAME')
 
-
         # Init random state.
         random.seed(self.random_state)
 
@@ -44,7 +39,7 @@ class Game:
         self.q = 1 - self.p
 
         # Ask for gain if you win per turn.
-        self.win_return = self.ask_number(Q_GAIN_PERCENT, self.average_gain + 1, 200)
+        self.win_return = self.ask_number(Q_GAIN_PERCENT, self.average_gain, 200)
         # self.win_return = 200  # DEFAULT
 
         # Calculate lose percent.
@@ -74,37 +69,41 @@ class Game:
             else:
                 print(default_message)
 
-    def do_turn(self, p):
-        # Display current capital.
+    def do_turn(self):
+        # Display current game state.
         print(self)
-
         self.logger.info(self)
 
-        # Execute the turn.
-        bet = self.ask_number(Q_CHOOSE_BET, 1, self.capital)
+        # Request bet.
+        bet = self.ask_number(Q_CHOOSE_BET, 0, self.capital)
         self.logger.info(f"Bet: {bet}")
 
         r = random.random()
         self.capital -= bet
-        if r < p:
+        if r < self.p:
             print(f"You won!", end=' ')
+            self.logger.info("Win")
             received = bet * self.win_return / 100
         else:
             print(f"You lost!", end=' ')
+            self.logger.info("Lose")
             received = bet * self.lose_return / 100
 
         print(f"Bet: {bet:.2f}. Received back: {received:.2f}")
         self.capital += received
 
     def play(self):
+        self.logger.info(f"Game starts.")
         for self.turn in itertools.count(1):
-            self.do_turn(self.p)
+            self.do_turn()
             if self.capital <= 0:
                 print(f"GAME OVER (you lost all your money)")
                 break
             if self.turn >= self.total_turns:
                 print("Game ends.", self)
                 break
+        self.logger.info(self)
+        self.logger.info(f"Game ends.")
 
 
 if __name__ == '__main__':

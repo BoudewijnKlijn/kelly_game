@@ -1,6 +1,7 @@
 import itertools
 import random
 import time
+import logging
 
 
 STARTUP_MESSAGE = "Welcome to Kelly game.\n" \
@@ -27,6 +28,9 @@ class Game:
         self.average_gain = AVERAGE_GAIN
         self.turn = 0
         self.random_state = int(time.time())
+        logging.basicConfig(filename='log.log', filemode="a", level=logging.DEBUG)
+        self.logger = logging.getLogger('GAME')
+
 
         # Init random state.
         random.seed(self.random_state)
@@ -74,8 +78,11 @@ class Game:
         # Display current capital.
         print(self)
 
+        self.logger.info(self)
+
         # Execute the turn.
         bet = self.ask_number(Q_CHOOSE_BET, 1, self.capital)
+        self.logger.info(f"Bet: {bet}")
 
         r = random.random()
         self.capital -= bet
@@ -95,8 +102,9 @@ class Game:
             if self.capital <= 0:
                 print(f"GAME OVER (you lost all your money)")
                 break
-            if self.turn == self.total_turns:
+            if self.turn >= self.total_turns:
                 print("Game ends.", self)
+                break
 
 
 if __name__ == '__main__':

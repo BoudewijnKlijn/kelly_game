@@ -1,0 +1,18 @@
+INFO:GAME:Game starts.
+INFO:GAME:Game(self.capital=100, self.average_gain=107, self.p=0.6, self.q=0.4, self.win_return=200, self.lose_return=-13.0, self.total_turns=5, self.turn=1, self.random_state=1640528562)
+INFO:GAME:Bet: 40
+INFO:GAME:Win
+INFO:GAME:Game(self.capital=140.0, self.average_gain=107, self.p=0.6, self.q=0.4, self.win_return=200, self.lose_return=-13.0, self.total_turns=5, self.turn=2, self.random_state=1640528562)
+INFO:GAME:Bet: 56
+INFO:GAME:Lose
+INFO:GAME:Game(self.capital=76.72, self.average_gain=107, self.p=0.6, self.q=0.4, self.win_return=200, self.lose_return=-13.0, self.total_turns=5, self.turn=3, self.random_state=1640528562)
+INFO:GAME:Bet: 30
+INFO:GAME:Win
+INFO:GAME:Game(self.capital=106.72, self.average_gain=107, self.p=0.6, self.q=0.4, self.win_return=200, self.lose_return=-13.0, self.total_turns=5, self.turn=4, self.random_state=1640528562)
+INFO:GAME:Bet: 41
+INFO:GAME:Win
+INFO:GAME:Game(self.capital=147.72, self.average_gain=107, self.p=0.6, self.q=0.4, self.win_return=200, self.lose_return=-13.0, self.total_turns=5, self.turn=5, self.random_state=1640528562)
+INFO:GAME:Bet: 60
+INFO:GAME:Lose
+INFO:GAME:Game(self.capital=79.92, self.average_gain=107, self.p=0.6, self.q=0.4, self.win_return=200, self.lose_return=-13.0, self.total_turns=5, self.turn=5, self.random_state=1640528562)
+INFO:GAME:Game ends.

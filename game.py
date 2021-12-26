@@ -24,7 +24,7 @@ class Game:
         self.average_gain = AVERAGE_GAIN
         self.turn = 0
         self.random_state = int(time.time())
-        logging.basicConfig(filename='log.log', filemode="a", level=logging.DEBUG)
+        logging.basicConfig(filename='log.txt', filemode="a", level=logging.DEBUG)
         self.logger = logging.getLogger('GAME')
 
         # Init random state.
